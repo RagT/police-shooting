@@ -21,6 +21,10 @@ var customBuild = function(response, map) {
 	for(var i = 0; i < arr.length; i++){
 		var source = arr[i]['Source Link'];
 		var summary = arr[i]['Summary'];
+		var year = null;
+		if(arr[i]['Date Searched'] != undefined){
+			year = arr[i]['Date Searched'].substr(arr[i]['Date Searched'].length - 4);
+		}
 		var circColor = 'yellow';
 		if(arr[i]['Hit or Killed?'] == 'Killed'){
 			circColor = 'red';
@@ -29,8 +33,21 @@ var customBuild = function(response, map) {
 			color: circColor,
 			fillColor: circColor 
 		}).addTo(map);
+		circle.setRadius(radius(year));
 		circle.bindPopup(summary+ " <a target=\"blank\" href="+source+">Full Story</a>");
 	}
+}
+
+var radius = function(year){
+	var currYear = new Date().getFullYear();
+	var diff = currYear - year;
+	if(diff > 15){
+		return 3;
+	}
+	if(diff < 5){
+		return 15;
+	}
+	return 15/(diff/5);
 }
 
 

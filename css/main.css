@@ -1,12 +1,19 @@
 p{
 	font-size: 25px;
+	width: 600px;
+	float: left;
 }
 
 h1{
 	text-align: center;
+	clear: left;
 }
 
-#container{
+#container, body, p{
 	margin: auto;
+}
+
+body{
+	width: 1500px;
 }
 
